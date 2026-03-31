@@ -1,121 +1,135 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { Component } from "react";
+import './App.css';
+import { useState, useEffect } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    this.state = {
+      page: "home",
+    };
+  }
+
+  changePage = (page) => {
+    this.setState({ page });
+  };
+
+  render() {
+    return (
+      <div className="container">
+        <h1>AI-Roadmap-Generator</h1>
+
+        
+        <div className="nav-buttons">
+          <button
+            onClick={() => this.changePage("home")}
+            className={this.state.page === "home" ? "active" : ""}
+          >
+            Home
+          </button>
+
+          <button
+            onClick={() => this.changePage("about")}
+            className={this.state.page === "about" ? "active" : ""}
+          >
+            About
+          </button>
+
+          <button
+            onClick={() => this.changePage("contact")}
+            className={this.state.page === "contact" ? "active" : ""}
+          >
+            Contact
+          </button>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+        
+        <div className="page-content">
+          {this.state.page === "home" && <h2>🏠 Home Page</h2>}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          {this.state.page === "about" && (
+            <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+              
+              <h2>Our Mission</h2>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+              <p style={{ color: "#cbd5e1" }}>
+                Simplifying <span style={{ color: "#a855f7" }}>Learning</span> with AI.
+                We turn complex topics into structured learning paths.
+              </p>
+
+              <div style={{
+                display: "flex",
+                gap: "20px",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                marginTop: "30px"
+              }}>
+                <div style={cardStyle}>
+                  <h3>Personalized Guidance</h3>
+                  <p>Roadmaps tailored to your level.</p>
+                </div>
+
+                <div style={cardStyle}>
+                  <h3>Structured Progress</h3>
+                  <p>Break topics into milestones.</p>
+                </div>
+
+                <div style={cardStyle}>
+                  <h3>AI Intelligence</h3>
+                  <p>Smart AI-powered learning paths.</p>
+                </div>
+              </div>
+
+            </div>
+          )}
+
+          {this.state.page === "contact" && (
+            <div>
+              <h2>📞 Contact Us</h2>
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  alert("Message sent!");
+                }}
+              >
+                <div>
+                  <label>Name:</label><br />
+                  <input type="text" required />
+                </div>
+
+                <br />
+
+                <div>
+                  <label>Email:</label><br />
+                  <input type="email" required />
+                </div>
+
+                <br />
+
+                <div>
+                  <label>Message:</label><br />
+                  <textarea required></textarea>
+                </div>
+
+                <br />
+
+                <button type="submit">Send</button>
+              </form>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 }
-
-export default App
+const cardStyle = {
+  width: "250px",
+  padding: "20px",
+  borderRadius: "15px",
+  background: "rgba(147,51,234,0.3)",
+  color: "white",
+  boxShadow: "0 4px 15px rgba(0,0,0,0.3)"
+};
+export default App;
