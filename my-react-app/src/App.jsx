@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './App.css';
+import backgroundImage from './assets/background.jpg';
 import { useState, useEffect } from "react";
 
 class App extends Component {
@@ -46,7 +47,39 @@ class App extends Component {
 
         
         <div className="page-content">
-          {this.state.page === "home" && <h2>🏠 Home Page</h2>}
+            {this.state.page === "home" && (
+          <div
+            className="home-page"
+            style={{
+              backgroundImage: `url(${backgroundImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              width: "70vw",
+              height: "70vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              position: "relative",
+            }}
+          >
+            {/* Overlay */}
+            <div className="overlay"></div>
+
+            {/* Content */}
+            <div className="home-content">
+              <h1 style={{ color: "white", fontSize: "3rem", marginBottom: "20px" }}>
+                Welcome to AI-Roadmap-Generator
+              </h1>
+              <button
+                className="get-started-btn"
+                onClick={() => alert("Get Started clicked!")}
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+        )}
 
           {this.state.page === "about" && (
             <div style={{ maxWidth: "900px", margin: "0 auto" }}>
