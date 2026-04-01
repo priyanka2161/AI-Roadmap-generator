@@ -1,168 +1,168 @@
 import React, { Component } from "react";
-import './App.css';
-import backgroundImage from './assets/background.jpg';
-import { useState, useEffect } from "react";
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      page: "home",
+      sent: false,
+      name: "",
+      email: "",
+      message: "",
+      contactOpen: false,
     };
   }
 
-  changePage = (page) => {
-    this.setState({ page });
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ sent: true });
+    setTimeout(
+      () =>
+        this.setState({
+          sent: false,
+          name: "",
+          email: "",
+          message: "",
+          contactOpen: false,
+        }),
+      2000
+    );
+  };
+
+  toggleContact = () => {
+    this.setState((prev) => ({ contactOpen: !prev.contactOpen }));
   };
 
   render() {
+    const { sent, name, email, message, contactOpen } = this.state;
+
     return (
-      <div className="container">
-        <h1>AI-Roadmap-Generator</h1>
+      <div>
+        <nav className="navbar">
+          <span className="logo">AI Roadmapify</span>
+          <button className="btn-login">Log in</button>
+        </nav>
 
-        
-        <div className="nav-buttons">
-          <button
-            onClick={() => this.changePage("home")}
-            className={this.state.page === "home" ? "active" : ""}
-          >
-            Home
-          </button>
-
-          <button
-            onClick={() => this.changePage("about")}
-            className={this.state.page === "about" ? "active" : ""}
-          >
-            About
-          </button>
-
-          <button
-            onClick={() => this.changePage("contact")}
-            className={this.state.page === "contact" ? "active" : ""}
-          >
-            Contact
-          </button>
-        </div>
-
-        
-        <div className="page-content">
-            {this.state.page === "home" && (
-          <div
-            className="home-page"
-            style={{
-              backgroundImage: `url(${backgroundImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              width: "70vw",
-              height: "70vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              position: "relative",
-            }}
-          >
-            {/* Overlay */}
-            <div className="overlay"></div>
-
-            {/* Content */}
-            <div className="home-content">
-              <h1 style={{ color: "white", fontSize: "3rem", marginBottom: "20px" }}>
-                Welcome to AI-Roadmap-Generator
-              </h1>
-              <button
-                className="get-started-btn"
-                onClick={() => alert("Get Started clicked!")}
-              >
-                Get Started
-              </button>
+        <section className="hero" id="home">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Your Personal <br />
+              <span className="highlight">Learning Roadmap</span>
+              <br />
+              Starts Here
+            </h1>
+            <p className="hero-desc">
+              Tell us your goal. Our AI breaks it into a clear, structured
+              roadmap path — from zero to mastery, one milestone at a time.
+            </p>
+            <div className="hero-buttons">
+              <a href="#about" className="btn-primary">
+                How It Works
+              </a>
+              <a href="#about" className="btn-secondary">
+                Get Started →
+              </a>
             </div>
           </div>
-        )}
+        </section>
 
-          {this.state.page === "about" && (
-            <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-              
-              <h2>Our Mission</h2>
-
-              <p style={{ color: "#cbd5e1" }}>
-                Simplifying <span style={{ color: "#a855f7" }}>Learning</span> with AI.
-                We turn complex topics into structured learning paths.
+        <section className="about" id="about">
+          <div className="about-inner">
+            <div className="about-left">
+              <p className="section-label">About the Project</p>
+              <h2 className="section-title">
+                We turn ambition into{" "}
+                <span className="highlight">actionable steps</span>
+              </h2>
+              <p className="section-desc">
+                AI-Roadmap-Generator uses cutting-edge language models to
+                analyse your current level and target destination, then
+                constructs a curated, week-by-week learning plan —
+                completely personalised to you.
               </p>
+            </div>
 
-              <div style={{
-                display: "flex",
-                gap: "20px",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                marginTop: "30px"
-              }}>
-                <div style={cardStyle}>
-                  <h3>Personalized Guidance</h3>
-                  <p>Roadmaps tailored to your level.</p>
-                </div>
-
-                <div style={cardStyle}>
-                  <h3>Structured Progress</h3>
-                  <p>Break topics into milestones.</p>
-                </div>
-
-                <div style={cardStyle}>
-                  <h3>AI Intelligence</h3>
-                  <p>Smart AI-powered learning paths.</p>
-                </div>
+            <div className="about-cards">
+              <div className="card">
+                <span className="card-icon">🎯</span>
+                <h3>Personalised Guidance</h3>
+                <p>
+                  Roadmaps adapt to your existing knowledge, pace, and learning
+                  style.
+                </p>
               </div>
-
+              <div className="card">
+                <span className="card-icon">🗺️</span>
+                <h3>Structured Milestones</h3>
+                <p>Complex topics broken into bite-sized, achievable checkpoints.</p>
+              </div>
+              <div className="card">
+                <span className="card-icon">⚡</span>
+                <h3>AI Intelligence</h3>
+                <p>Powered by state-of-the-art models that understand context and intent.</p>
+              </div>
+              <div className="card">
+                <span className="card-icon">📈</span>
+                <h3>Progress Tracking</h3>
+                <p>See how far you've come and what's next — always stay motivated.</p>
+              </div>
             </div>
-          )}
+          </div>
+        </section>
 
-          {this.state.page === "contact" && (
-            <div>
-              <h2>📞 Contact Us</h2>
+        <footer>
+          <div className="footer-inner footer-center">
+            <span className="footer-logo">AI Roadmapify</span>
+            <p className="footer-desc">
+              Simplifying learning with AI. From beginner to expert — we map the journey so you can focus on moving forward.
+            </p>
+            <div className="footer-contact">
+              <button className="btn-primary" onClick={this.toggleContact}>
+                Contact Us
+              </button>
 
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  alert("Message sent!");
-                }}
-              >
-                <div>
-                  <label>Name:</label><br />
-                  <input type="text" required />
+              {contactOpen && (
+                <div className="popup-form">
+                  <form className="contact-form" onSubmit={this.handleSubmit}>
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      value={name}
+                      onChange={(e) => this.setState({ name: e.target.value })}
+                      required
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      value={email}
+                      onChange={(e) => this.setState({ email: e.target.value })}
+                      required
+                    />
+                    <textarea
+                      placeholder="Your message…"
+                      value={message}
+                      onChange={(e) => this.setState({ message: e.target.value })}
+                      required
+                    />
+                    <button type="submit" className="btn-primary">
+                      {sent ? "✓ Sent!" : "Send Message"}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      onClick={this.toggleContact}
+                    >
+                      ✕
+                    </button>
+                  </form>
                 </div>
-
-                <br />
-
-                <div>
-                  <label>Email:</label><br />
-                  <input type="email" required />
-                </div>
-
-                <br />
-
-                <div>
-                  <label>Message:</label><br />
-                  <textarea required></textarea>
-                </div>
-
-                <br />
-
-                <button type="submit">Send</button>
-              </form>
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        </footer>
       </div>
     );
   }
 }
-const cardStyle = {
-  width: "250px",
-  padding: "20px",
-  borderRadius: "15px",
-  background: "rgba(147,51,234,0.3)",
-  color: "white",
-  boxShadow: "0 4px 15px rgba(0,0,0,0.3)"
-};
+
 export default App;
