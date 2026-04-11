@@ -1,0 +1,2 @@
+{"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"name":"test","email":"test@test.com","password":"$2a$10$URqCKlOMLwmWq25SJv8Sbu.dSztSKFPXzAz/xldRgVJhyKAjGIk5W","created_at":{"$$date":1775920341823},"_id":"zeRBTDutJq98beSr"}
